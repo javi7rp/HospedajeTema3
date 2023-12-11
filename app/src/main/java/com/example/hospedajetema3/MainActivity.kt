@@ -10,37 +10,30 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide.init
+import com.example.hospedajetema3.controler.Controller
 import com.example.hospedajetema3.ui.theme.HospedajeTema3Theme
 
 class MainActivity : ComponentActivity() {
+    lateinit var controller: Controller
+    lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            HospedajeTema3Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
-        }
+        binding =  ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        init()
+
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    private fun init() {
+        initRecyclerView()
+        controller = Controller(this)
+        controller.setAdapter()
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HospedajeTema3Theme {
-        Greeting("Android")
+    private fun initRecyclerView() {
+        binding.recycler_view.layoutManager = LinearLayoutManager(this)
     }
 }
