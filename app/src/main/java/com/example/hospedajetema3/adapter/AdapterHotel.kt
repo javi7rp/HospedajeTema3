@@ -6,12 +6,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hospedajetema3.R
 import com.example.hospedajetema3.models.Hotel
 
-class AdapterHotel( var listHotel : MutableList<Hotel>) : RecyclerView.Adapter<ViewHHotel>(){
+class AdapterHotel(
+    var listHotel : MutableList<Hotel>,
+    var deleteOnClick: (Int) -> Unit,
+    var updateOnClick: (Int) -> Unit
+    ) : RecyclerView.Adapter<ViewHHotel>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHHotel {
         val layoutInflater = LayoutInflater.from(parent. context)//objeto para crear la vista.
         val layoutItemHotel = R.layout.recycler_view //accedo al xml del item a crear.
-        return ViewHHotel(layoutInflater.inflate(layoutItemHotel, parent, false))
+        return ViewHHotel(layoutInflater.inflate(layoutItemHotel, parent, false),
+            deleteOnClick,
+            updateOnClick)
     }
 
     override fun onBindViewHolder(holder: ViewHHotel, position: Int) {

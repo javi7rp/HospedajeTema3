@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hospedajetema3.models.Hotel
 import com.example.hospedajetema3.databinding.RecyclerViewBinding
 import com.bumptech.glide.Glide
-class ViewHHotel (view: View) : RecyclerView.ViewHolder (view){
+class ViewHHotel (view: View,
+                    var deleteOnClick: (Int) -> Unit,
+                    var updateOnClick: (Int) -> Unit
+    ) : RecyclerView.ViewHolder (view){
     private var binding: RecyclerViewBinding
     init {
         binding = RecyclerViewBinding.bind(view)
@@ -24,5 +27,15 @@ class ViewHHotel (view: View) : RecyclerView.ViewHolder (view){
             .load(url)
             .centerCrop()
             .into(imageView)
+    }
+
+    private fun setOnClickListener(position: Int){
+        binding.btnEdit.setOnClickListener {
+            updateOnClick(position)
+        }
+        binding.btnDelete.setOnClickListener {
+            deleteOnClick(position)
+        }
+
     }
 }

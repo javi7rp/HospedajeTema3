@@ -24,6 +24,12 @@ class Controller ( val context : Context){
     }
     fun setAdapter() { // Cargamos nuestro AdapterHotgel al adapter del RecyclerView
         val myActivity = context as MainActivity
-        myActivity.binding.myRecyclerView.adapter = AdapterHotel(listHotels) // Cargamos el Adapter que creamos.
+        myActivity.binding.myRecyclerView.adapter = AdapterHotel(listHotels,{pos -> deleteHotel(pos)},{pos -> updateHotel(pos)})
+    }
+
+    fun deleteHotel(pos:Int){
+        Toast.makeText(context, "Borramos el hotel $pos",Toast.LENGTH_LONG).show()
+        listHotels.removeAt(pos)
+
     }
 }
