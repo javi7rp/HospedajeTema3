@@ -70,7 +70,8 @@
             android:textSize = "20sp"
             />
 
-        <ImageView
+        <ImageButton
+            android:scaleType="centerCrop"
             android:id="@+id/btn_edit"
             android:layout_width ="30dp"
             android:layout_height ="30dp"
@@ -79,7 +80,8 @@
             app:layout_constraintStart_toEndOf ="@id/iv_hotel"
             app:layout_constraintTop_toBottomOf ="@id/txtview_phone"
             />
-        <ImageView
+        <ImageButton
+            android:scaleType="centerCrop"
             android:id="@+id/btn_delete"
             android:layout_width ="30dp"
             android:layout_height ="30dp"

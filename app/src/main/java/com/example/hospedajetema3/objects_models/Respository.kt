@@ -5,10 +5,10 @@ import com.example.hospedajetema3.models.Hotel
 object Respository {
     val listHotel : List<Hotel> = listOf(
         Hotel(
-            "Nombre de hotel 1", "ciudad 1", "provincia 1", "953 00 00 01", "https://cdn.pixabay.com/photo/2020/10/18/09/16/bedroom-5664221_1280.jpg"
+            "Nombre de hotel 1", "ciudad 1", "provincia 1", "953 00 00 01", "@drawable/hotel_portada"
         ),
         Hotel(
-            "Nombre de hotel 2", "ciudad 2", "provincia 2", "953 00 00 02", "https://cdn.pixabay.com/photo/2013/04/18/14/39/ship-105596_1280.jpg"
+            "Nombre de hotel 2", "ciudad 2", "provincia 2", "953 00 00 02", "@drawable/hotel_portada"
         ),
         Hotel(
             "Nombre de hotel 3", "ciudad 3", "provincia 3", "953 00 00 03", "https://cdn.pixabay.com/photo/2021/12/11/07/59/hotel-6862159_1280.jpg"
