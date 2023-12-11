@@ -24,6 +24,6 @@ class Controller ( val context : Context){
     }
     fun setAdapter() { // Cargamos nuestro AdapterHotgel al adapter del RecyclerView
         val myActivity = context as MainActivity
-        myActivity.binding = AdapterHotel( listHotels) // Cargamos el Adapter que creamos.
+        myActivity.binding.myRecyclerView.adapter = AdapterHotel(listHotels) // Cargamos el Adapter que creamos.
     }
 }
