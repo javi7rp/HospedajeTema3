@@ -7,7 +7,7 @@ import com.example.hospedajetema3.models.Hotel
 import com.bumptech.glide.Glide
 import com.example.hospedajetema3.databinding.ItemHotelBinding
 class ViewHHotel (view: View) : RecyclerView.ViewHolder (view){
-    lateinit var binding: ItemHotelBinding
+    private var binding: ItemHotelBinding
     init {
         binding = ItemHotelBinding.bind(view)
     }
