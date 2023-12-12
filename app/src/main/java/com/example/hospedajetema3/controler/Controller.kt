@@ -51,19 +51,22 @@ class Controller ( val context : Context){
     fun setAddButton(addButton: ImageButton) {
         this.addButton = addButton
         this.addButton.setOnClickListener {
-            addHotel(listHotels.size+1)
+            addHotel()
         }
     }
 
-    private fun addHotel(pos: Int) {
-        mostrarCrearDialogo(object : DialogCallback{
+    private fun addHotel() {
+        mostrarCrearDialogo(object : DialogCallbackC{
             override fun onDialogResult(newHotel: Array<String>, isCanceled: Boolean) {
                 if (!isCanceled){
                     val updatedHotel = Hotel(newHotel[0],newHotel[1],newHotel[2],newHotel[3], newHotel[4])
-                    listHotels.add(pos, updatedHotel)
-                    Log.i("CREADO", "HOTEL CREADO " + updatedHotel.toString())
+                    listHotels.add(updatedHotel)
+                    Toast.makeText(context, "HOTEL CREADO, POSICION: " + (listHotels.size),Toast.LENGTH_LONG).show()
 
-                    adapterHotel.notifyItemChanged(pos)
+                    val newPos = (listHotels.size-1)
+                    adapterHotel.notifyItemInserted(newPos)
+
+                    recyclerView.smoothScrollToPosition(newPos)
                 }
             }
         })
@@ -81,7 +84,8 @@ class Controller ( val context : Context){
 
 
     private fun updateHotel(pos: Int) {
-        mostrarUpdateDialogo(object : DialogCallback{
+        val selectedHotel = listHotels[pos]
+        mostrarUpdateDialogo(selectedHotel, object : DialogCallbackC{
             override fun onDialogResult(newHotel: Array<String>, isCanceled: Boolean) {
                 if (!isCanceled){
                     val imagen =  listHotels[pos].image
@@ -95,8 +99,11 @@ class Controller ( val context : Context){
             }
         })
     }
-    private fun mostrarUpdateDialogo(callBack: DialogCallback){
+    private fun mostrarUpdateDialogo(selectedHotel: Hotel, callBack: DialogCallbackC){
         val newHotel = Array(4){""}
+
+
+
         var isCanceled = false
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Actualizar Hotel ")
@@ -108,35 +115,47 @@ class Controller ( val context : Context){
         textName.text = "Nombre: "
         layout.addView(textName)
         val name = EditText(context)
+        name.setText(selectedHotel.name)
         layout.addView(name)
 
         val textCity = TextView(context)
         textCity.text = "Ciudad: "
         layout.addView(textCity)
         val city = EditText(context)
+        city.setText(selectedHotel.city)
         layout.addView(city)
 
         val textProvince = TextView(context)
         textProvince.text = "Provincia: "
         layout.addView(textProvince)
         val province = EditText(context)
+        province.setText(selectedHotel.province)
         layout.addView(province)
 
         val textPhone = TextView(context)
         textPhone.text = "Telefono: "
         layout.addView(textPhone)
         val phone = EditText(context)
+        phone.setText(selectedHotel.phone)
         layout.addView(phone)
 
         builder.setView(layout)
 
-        builder.setPositiveButton("Aceptar"){
-            dialog, which ->
+        builder.setPositiveButton("Aceptar"){dialog, which ->
             newHotel[0] = name.text.toString()
             newHotel[1] = city.text.toString()
             newHotel[2] = province.text.toString()
             newHotel[3] = phone.text.toString()
-            callBack.onDialogResult(newHotel, isCanceled)
+
+            if(newHotel[0] != "" && newHotel[1] != "" && newHotel[2] != "" && newHotel[3] != "" ){
+                callBack.onDialogResult(newHotel, isCanceled)
+                Toast.makeText(context, "HOTEL MODIFICADO", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(context, "ERROR AL MODIFICAR, DEBES RELLENAR TODOS LOS CAMPOS", Toast.LENGTH_SHORT).show()
+            }
+
+
+
 
         }
 
@@ -150,7 +169,7 @@ class Controller ( val context : Context){
         builder.show()
     }
 
-    private fun mostrarCrearDialogo(callBack: DialogCallback){
+    private fun mostrarCrearDialogo(callBack: DialogCallbackC){
         val newHotel = Array(5){""}
         var isCanceled = false
         val builder = AlertDialog.Builder(context)
@@ -183,6 +202,12 @@ class Controller ( val context : Context){
         val phone = EditText(context)
         layout.addView(phone)
 
+        val textImagen = TextView(context)
+        textImagen.text = "Imagen: "
+        layout.addView(textImagen)
+        val imagen = EditText(context)
+        layout.addView(imagen)
+
         builder.setView(layout)
 
         builder.setPositiveButton("Aceptar"){
@@ -191,7 +216,13 @@ class Controller ( val context : Context){
             newHotel[1] = city.text.toString()
             newHotel[2] = province.text.toString()
             newHotel[3] = phone.text.toString()
-            callBack.onDialogResult(newHotel, isCanceled)
+            newHotel[4] = imagen.text.toString()
+
+            if(newHotel[0] != "" && newHotel[1] != "" && newHotel[2] != "" && newHotel[3] != "" && newHotel[4] != "" ){
+                callBack.onDialogResult(newHotel, isCanceled)
+            }else{
+                Toast.makeText(context, "ERROR AL CREAR, DEBES RELLENAR TODOS LOS CAMPOS", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
@@ -205,7 +236,7 @@ class Controller ( val context : Context){
         builder.show()
     }
 
-    interface DialogCallback {
+    interface DialogCallbackC {
         fun onDialogResult(newHotel: Array<String>, isCanceled: Boolean)
     }
 }
