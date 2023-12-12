@@ -13,15 +13,18 @@ class AdapterHotel(
     ) : RecyclerView.Adapter<ViewHHotel>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHHotel {
-        val layoutInflater = LayoutInflater.from(parent. context)//objeto para crear la vista.
-        val layoutItemHotel = R.layout.recycler_view //accedo al xml del item a crear.
-        return ViewHHotel(layoutInflater.inflate(layoutItemHotel, parent, false),
+        val layoutInflater = LayoutInflater.from(parent. context)
+        val layoutItemHotel = R.layout.recycler_view
+        return ViewHHotel(
+            layoutInflater.inflate(layoutItemHotel, parent, false),
             deleteOnClick,
-            updateOnClick)
+            updateOnClick
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHHotel, position: Int) {
         holder.renderize( listHotel.get(position)) //renderizamos la view.
+        holder.setOnClickListener(position)
     }
     override fun getItemCount(): Int = listHotel.size
 }

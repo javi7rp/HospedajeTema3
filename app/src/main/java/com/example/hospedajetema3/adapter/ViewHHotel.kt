@@ -1,5 +1,6 @@
 package com.example.hospedajetema3.adapter
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -29,12 +30,15 @@ class ViewHHotel (view: View,
             .into(imageView)
     }
 
-    private fun setOnClickListener(position: Int){
+   fun setOnClickListener(position: Int){
         binding.btnEdit.setOnClickListener {
             updateOnClick(position)
+            Log.i("info","PULSADO BOTON" +
+                    " EDITAR " + position)
         }
         binding.btnDelete.setOnClickListener {
             deleteOnClick(position)
+            Log.i("info","PULSADO BOTON BORRAR " + position)
         }
 
     }

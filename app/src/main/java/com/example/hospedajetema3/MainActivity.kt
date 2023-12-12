@@ -1,6 +1,7 @@
 package com.example.hospedajetema3
 
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,8 +20,9 @@ import com.example.hospedajetema3.ui.theme.HospedajeTema3Theme
 import com.example.hospedajetema3.databinding.MainBinding
 
 class MainActivity : ComponentActivity() {
-    lateinit var controller: Controller
+    private lateinit var controller: Controller
     lateinit var binding : MainBinding
+    private lateinit var myRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +36,21 @@ class MainActivity : ComponentActivity() {
         initRecyclerView()
         controller = Controller(this)
         controller.setAdapter()
+
+        myRecyclerView =  findViewById(R.id.my_recycler_view)
+        controller.setRecyclerView(myRecyclerView)
+
+        val addButton = findViewById<ImageButton>(R.id.btn_add)
+        controller.setAddButton(addButton)
     }
 
     private fun initRecyclerView() {
-        var myReciclerView = findViewById<RecyclerView>(R.id.my_recycler_view)
-        myReciclerView.layoutManager = LinearLayoutManager(this)
+        myRecyclerView = findViewById(R.id.my_recycler_view)
+        myRecyclerView.layoutManager = LinearLayoutManager(this)
     }
+
+
+
 
 
 }
