@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="verde_claro">#82E0AA</color>
     <color name="verde_oscuro">#239B56</color>
+    <color name="fondo_app">#115CC8</color>
 </resources>
