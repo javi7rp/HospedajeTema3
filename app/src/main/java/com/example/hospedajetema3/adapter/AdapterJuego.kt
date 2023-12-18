@@ -4,27 +4,28 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hospedajetema3.R
-import com.example.hospedajetema3.models.Hotel
+import com.example.hospedajetema3.models.Juego
 
-class AdapterHotel(
-    var listHotel : MutableList<Hotel>,
+class AdapterJuego(
+    var listJuego : MutableList<Juego>,
     var deleteOnClick: (Int) -> Unit,
     var updateOnClick: (Int) -> Unit
-    ) : RecyclerView.Adapter<ViewHHotel>(){
+    ) : RecyclerView.Adapter<ViewJuego>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHHotel {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewJuego {
         val layoutInflater = LayoutInflater.from(parent. context)
         val layoutItemHotel = R.layout.recycler_view
-        return ViewHHotel(
+        return ViewJuego(
             layoutInflater.inflate(layoutItemHotel, parent, false),
             deleteOnClick,
             updateOnClick
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHHotel, position: Int) {
-        holder.renderize( listHotel.get(position)) //renderizamos la view.
+    override fun onBindViewHolder(holder: ViewJuego, position: Int) {
+        val juego = listJuego[position]
+        holder.renderize(juego, holder.itemView.context)
         holder.setOnClickListener(position)
     }
-    override fun getItemCount(): Int = listHotel.size
+    override fun getItemCount(): Int = listJuego.size
 }
