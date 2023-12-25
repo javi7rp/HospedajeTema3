@@ -16,9 +16,10 @@ import com.example.hospedajetema3.MainActivity
 import com.example.hospedajetema3.R
 import com.example.hospedajetema3.adapter.AdapterJuego
 import com.example.hospedajetema3.dao.DaoJuegos2
+import com.example.hospedajetema3.databinding.FragmentInicioBinding
 import com.example.hospedajetema3.models.Juego
 
-class Controller ( val context : Context){
+class Controller ( val context : Context, val binding: FragmentInicioBinding){
     private lateinit var listJuego : MutableList<Juego> //lista de objetos
     private lateinit var adapterJuego: AdapterJuego
     private lateinit var recyclerView: RecyclerView
@@ -45,7 +46,7 @@ class Controller ( val context : Context){
             {pos -> deleteJuego(pos)},
             {pos -> updateJuego(pos)}
         )
-        myActivity.binding.myRecyclerView.adapter = adapterJuego
+        binding.myRecyclerView.adapter = adapterJuego
     }
 
     fun setRecyclerView(recyclerView: RecyclerView) {
@@ -60,7 +61,6 @@ class Controller ( val context : Context){
     }
 
     private fun addJuego() {
-
         mostrarCrearDialogo(object : DialogCallbackC{
             override fun onDialogResult(newJuego: Array<String>, isCanceled: Boolean) {
                 if (!isCanceled){
