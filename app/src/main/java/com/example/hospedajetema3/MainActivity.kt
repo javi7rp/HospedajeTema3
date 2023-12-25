@@ -1,49 +1,94 @@
 package com.example.hospedajetema3
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.ImageButton
-import androidx.activity.ComponentActivity
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.hospedajetema3.controler.Controller
-import com.example.hospedajetema3.databinding.MainBinding
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.hospedajetema3.fragments.FragmentInicio
+import com.example.hospedajetema3.fragments.FragmentLupa
+import com.example.hospedajetema3.fragments.FragmentFav
+import com.example.hospedajetema3.fragments.FragmentPerfil
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : ComponentActivity() {
-    private lateinit var controller: Controller
-    lateinit var binding : MainBinding
-    private lateinit var myRecyclerView: RecyclerView
+class MainActivity : AppCompatActivity() {
+    /*
+    //mi metodo con problemas
+    private lateinit var bottomNavigationView: BottomNavigationView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener)
+        supportFragmentManager.beginTransaction().replace(
+            R.id.fragment_container,
+            FragmentInicio()
+        ).commit()
+    }
+
+    private val navListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            var selectedFragment: Fragment? = null
+            when (item.itemId) {
+                R.id.nav_inicio -> selectedFragment = FragmentInicio()
+                R.id.nav_lupa -> selectedFragment = FragmentLupa()
+                R.id.nav_fav -> selectedFragment = FragmentFav()
+                R.id.nav_perfil -> selectedFragment = FragmentPerfil()
+            }
+            supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container,
+                selectedFragment!!
+            ).commit()
+
+            true
+        }*/
+
+
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var fragmentInicio: FragmentInicio
+    private lateinit var fragmentLupa: FragmentLupa
+    private lateinit var fragmentFav: FragmentFav
+    private lateinit var fragmentPerfil: FragmentPerfil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =  MainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        init()
+        setContentView(R.layout.main)
 
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        // Inicializa los fragmentos
+        fragmentInicio = FragmentInicio()
+        fragmentLupa = FragmentLupa()
+        fragmentFav = FragmentFav()
+        fragmentPerfil = FragmentPerfil()
+
+        // Añade el fragmento inicial
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, fragmentPerfil)
+            .add(R.id.fragment_container, fragmentFav)
+            .add(R.id.fragment_container, fragmentLupa)
+            .add(R.id.fragment_container,fragmentInicio)
+            .commit()
+
+        // Configura el listener del BottomNavigationView
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener)
     }
 
-    private fun init() {
-        initRecyclerView()
-        controller = Controller(this)
-        controller.setAdapter()
+    private val navListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_inicio -> showFragment(fragmentInicio)
+                R.id.nav_lupa -> showFragment(fragmentLupa)
+                R.id.nav_fav -> showFragment(fragmentFav)
+                R.id.nav_perfil -> showFragment(fragmentPerfil)
+            }
+            true
+        }
 
-        myRecyclerView =  findViewById(R.id.my_recycler_view)
-        controller.setRecyclerView(myRecyclerView)
+    private fun showFragment(fragment: Fragment) {
+        // Oculta todos los fragmentos
+        supportFragmentManager.beginTransaction().hide(fragmentInicio)
+            .hide(fragmentLupa).hide(fragmentFav).hide(fragmentPerfil).commit()
 
-        val addButton = findViewById<ImageButton>(R.id.btn_add)
-        controller.setAddButton(addButton)
+        // Muestra el fragmento deseado
+        supportFragmentManager.beginTransaction().show(fragment).commit()
     }
-
-    private fun initRecyclerView() {
-        myRecyclerView = findViewById(R.id.my_recycler_view)
-        myRecyclerView.layoutManager = LinearLayoutManager(this)
-    }
-
-
-
-
-
 }

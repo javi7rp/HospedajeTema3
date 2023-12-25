@@ -11,27 +11,32 @@ import android.widget.TextView
 import android.widget.Toast
 import android.R.layout.simple_spinner_item
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hospedajetema3.MainActivity
-import com.example.hospedajetema3.R
 import com.example.hospedajetema3.adapter.AdapterJuego
 import com.example.hospedajetema3.dao.DaoJuegos2
+import com.example.hospedajetema3.databinding.FragmentInicioBinding
+import com.example.hospedajetema3.fragments.FragmentInicio
 import com.example.hospedajetema3.models.Juego
+import java.util.UUID
 
-class Controller ( val context : Context){
+class Controller ( val context : Context, val binding: FragmentInicioBinding){
     private lateinit var listJuego : MutableList<Juego> //lista de objetos
     private lateinit var adapterJuego: AdapterJuego
     private lateinit var recyclerView: RecyclerView
     private lateinit var addButton: ImageButton
 
-
+    private var favJuegos: MutableList<Juego> = mutableListOf() //Lista de juegos fav
 
     init {
         initData()
     }
     fun initData(){
-        listJuego = DaoJuegos2.myDao.toMutableList() //llamamos al singleton.
+
+        listJuego = DaoJuegos2.myDao.toMutableList()
     }
+
     fun loggOut() {
         Toast.makeText( context, "He mostrado los datos en pantalla", Toast. LENGTH_LONG).show()
         listJuego.forEach{
@@ -42,10 +47,11 @@ class Controller ( val context : Context){
         val myActivity = context as MainActivity
         adapterJuego = AdapterJuego(
             listJuego,
-            {pos -> deleteJuego(pos)},
-            {pos -> updateJuego(pos)}
+            {gameId -> deleteJuego(gameId)},
+            {gameId -> updateJuego(gameId)},
+            {gameId -> addFav(gameId) }
         )
-        myActivity.binding.myRecyclerView.adapter = adapterJuego
+        binding.myRecyclerView.adapter = adapterJuego
     }
 
     fun setRecyclerView(recyclerView: RecyclerView) {
@@ -60,13 +66,13 @@ class Controller ( val context : Context){
     }
 
     private fun addJuego() {
-
         mostrarCrearDialogo(object : DialogCallbackC{
             override fun onDialogResult(newJuego: Array<String>, isCanceled: Boolean) {
                 if (!isCanceled){
-                    val updatedJuego = Juego(newJuego[0],newJuego[1],newJuego[2],newJuego[3], newJuego[4])
+                    val updatedJuego = Juego(generarId(),newJuego[0],newJuego[1],newJuego[2],newJuego[3], newJuego[4])
                     listJuego.add(updatedJuego)
-                    Toast.makeText(context, "JUEGO CREADO, POSICION: " + (listJuego.size),Toast.LENGTH_LONG).show()
+                    //Toast.makeText(context, "JUEGO CREADO, POSICION: " + (listJuego.size),Toast.LENGTH_LONG).show()
+                    //Toast.makeText(context, updatedJuego.toString(),Toast.LENGTH_LONG).show()
 
                     val newPos = (listJuego.size-1)
                     adapterJuego.notifyItemInserted(newPos)
@@ -79,14 +85,18 @@ class Controller ( val context : Context){
 
 
 
-    fun deleteJuego(pos:Int){
+    fun deleteJuego(gameId: String){
         Log.i("aaaa" , "delete juego")
+
+        val selectedJuego = listJuego.find { it.id == gameId }
+        val pos = listJuego.indexOf(selectedJuego)
+
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Eliminar Juego")
         builder.setMessage("Deseas eliminar el juego: " + listJuego[pos].name)
 
         builder.setPositiveButton("Sí") { dialog, which ->
-            Toast.makeText(context, "Borramos el Juego " + (pos+1),Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Borrado el " + listJuego[pos].name,Toast.LENGTH_LONG).show()
             listJuego.removeAt(pos)
             //notificar el cambio
             adapterJuego.notifyItemRemoved(pos)
@@ -101,21 +111,32 @@ class Controller ( val context : Context){
     }
 
 
-    private fun updateJuego(pos: Int) {
+    fun updateJuego(gameId: String) {
         Log.i("aaaa" , "edit juego")
-        val selectedJuego = listJuego[pos]
-        mostrarUpdateDialogo(selectedJuego, object : DialogCallbackC{
-            override fun onDialogResult(newJuego: Array<String>, isCanceled: Boolean) {
-                if (!isCanceled){
-                    val imagen =  listJuego[pos].image
-                    listJuego.removeAt(pos)
-                    val updatedJuego = Juego(newJuego[0],newJuego[1],newJuego[2],newJuego[3], imagen)
-                    listJuego.add(pos, updatedJuego)
+        val selectedJuego = listJuego.find { it.id == gameId }
+        if (selectedJuego != null) {
+            mostrarUpdateDialogo(selectedJuego, object : DialogCallbackC {
+                override fun onDialogResult(newJuego: Array<String>, isCanceled: Boolean) {
+                    if (!isCanceled) {
+                        val imagen = selectedJuego.image
+                        val pos = listJuego.indexOf(selectedJuego)
+                        listJuego.removeAt(pos)
+                        val updatedJuego = Juego(
+                            generarId(),
+                            newJuego[0],
+                            newJuego[1],
+                            newJuego[2],
+                            newJuego[3],
+                            imagen,
+                            false
+                        )
+                        listJuego.add(pos, updatedJuego)
 
-                    adapterJuego.notifyItemChanged(pos)
+                        adapterJuego.notifyItemChanged(pos)
+                    }
                 }
-            }
-        })
+            })
+        }
     }
     private fun mostrarUpdateDialogo(selectedJuego: Juego, callBack: DialogCallbackC){
         val newJuego = Array(4){""}
@@ -257,10 +278,60 @@ class Controller ( val context : Context){
 
         builder.show()
     }
+
+    private fun addFav(gameId: String){
+
+        val selectedJuego = listJuego.find { it.id  == gameId }
+        val pos = listJuego.indexOf(selectedJuego)
+
+        val juego = listJuego[pos]
+        juego.isFav = !juego.isFav //Cambiamos el rol
+        if (juego.isFav){
+            favJuegos.add(juego) //lo añadimos a la lista
+        }else{
+            val favPos = favJuegos.indexOfFirst { it == juego }
+            if (favPos != -1){
+                favJuegos.remove(juego) //lo eliminamos de la lista
+            }
+        }
+        adapterJuego.notifyItemChanged(pos)
+
+    }
+    fun obtenerJuegosFav(): List<Juego> {
+        return listJuego.filter { it.isFav }
+    }
+
+
+
+    fun toggleFav(gameId: String){
+
+        val selectedJuego = listJuego.find { it.id  == gameId }
+        val pos = listJuego.indexOf(selectedJuego)
+
+        if (pos >= 0 && pos < listJuego.size) {
+            // Cambia el estado de favorito
+            listJuego[pos].isFav = !listJuego[pos].isFav
+
+            // Notifica al adaptador sobre el cambio
+            adapterJuego.notifyItemChanged(pos)
+        }
+    }
+
+    // Método para obtener la lista de juegos
+    fun getListJuego(): MutableList<Juego> {
+        return listJuego
+    }
+
+    // Método para obtener el adaptador del RecyclerView
+    fun getAdapterJuego(): AdapterJuego {
+        return adapterJuego
+    }
+
+    private fun generarId(): String {
+        return UUID.randomUUID().toString()
+    }
+
     interface DialogCallbackC {
         fun onDialogResult(newJuego: Array<String>, isCanceled: Boolean)
-    }
-    interface DialogCallbackD {
-        fun onDialogResult(pos: Int, isCanceled: Boolean)
     }
 }
