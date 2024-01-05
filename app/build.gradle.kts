@@ -71,6 +71,8 @@ dependencies {
 
     implementation("androidx.fragment:fragment-ktx:1.3.6")
 
+    implementation("pub.devrel:easypermissions:3.0.0")
+
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

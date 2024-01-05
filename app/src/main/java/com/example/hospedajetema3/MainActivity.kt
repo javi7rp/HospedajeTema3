@@ -10,18 +10,18 @@ import com.example.hospedajetema3.fragments.FragmentPerfil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    /*
-    //mi metodo con problemas
+
+
+    //mi metodo con el problema de se resetea el fragmento cada vez que navegas en el menu
     private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener)
-        supportFragmentManager.beginTransaction().replace(
-            R.id.fragment_container,
-            FragmentInicio()
-        ).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container,FragmentInicio())
+            .commit()
     }
 
     private val navListener =
@@ -33,15 +33,17 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_fav -> selectedFragment = FragmentFav()
                 R.id.nav_perfil -> selectedFragment = FragmentPerfil()
             }
-            supportFragmentManager.beginTransaction().replace(
-                R.id.fragment_container,
-                selectedFragment!!
-            ).commit()
+            supportFragmentManager.beginTransaction()
+
+                .replace(R.id.fragment_container,selectedFragment!!)
+                .commit()
 
             true
-        }*/
+        }
 
 
+    /*
+    //metodo con hide y show()
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var fragmentInicio: FragmentInicio
     private lateinit var fragmentLupa: FragmentLupa
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener)
 
         // Inicializa los fragmentos
         fragmentInicio = FragmentInicio()
@@ -60,14 +63,22 @@ class MainActivity : AppCompatActivity() {
         fragmentFav = FragmentFav()
         fragmentPerfil = FragmentPerfil()
 
-        // Añade el fragmento inicial
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, fragmentPerfil)
-            .add(R.id.fragment_container, fragmentFav)
-            .add(R.id.fragment_container, fragmentLupa)
-            .add(R.id.fragment_container,fragmentInicio)
-            .commit()
+        if (savedInstanceState == null){
+            // Añade el fragmento inicial
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, fragmentPerfil)
+                .add(R.id.fragment_container, fragmentLupa)
+                .add(R.id.fragment_container,fragmentInicio)
+                .add(R.id.fragment_container, fragmentFav)
+                .commit()
 
+            // Oculta todos los fragmentos excepto el inicial
+            supportFragmentManager.beginTransaction()
+                .hide(fragmentLupa)
+                .hide(fragmentFav)
+                .hide(fragmentPerfil)
+                .commit()
+        }
         // Configura el listener del BottomNavigationView
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener)
     }
@@ -85,10 +96,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragment(fragment: Fragment) {
         // Oculta todos los fragmentos
-        supportFragmentManager.beginTransaction().hide(fragmentInicio)
-            .hide(fragmentLupa).hide(fragmentFav).hide(fragmentPerfil).commit()
+        supportFragmentManager.beginTransaction()
+            .hide(fragmentInicio)
+            .hide(fragmentLupa)
+            .hide(fragmentFav)
+            .hide(fragmentPerfil)
+            .commit()
 
         // Muestra el fragmento deseado
-        supportFragmentManager.beginTransaction().show(fragment).commit()
+        supportFragmentManager.beginTransaction()
+            .show(fragment)
+            .commit()
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+    */
+
 }

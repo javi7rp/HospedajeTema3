@@ -14,6 +14,19 @@ import com.example.hospedajetema3.databinding.FragmentInicioBinding
 import com.example.hospedajetema3.models.Juego
 
 class FragmentFav : Fragment() {
+
+    /*
+    //Fondo de pantalla para pruebas
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_fav, container, false)
+    }*/
+
+
+
     private lateinit var controller: Controller
     private lateinit var binding: FragmentInicioBinding
 
