@@ -35,6 +35,18 @@
             app:layout_constraintStart_toEndOf ="@id/iv_juego"
             app:layout_constraintEnd_toEndOf ="parent"
             app:layout_constraintTop_toTopOf ="parent"/>
+        <ImageButton
+            android:scaleType="centerCrop"
+            android:id="@+id/btn_fav"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:src="@drawable/no_fav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            />
+
         <TextView
             android:id="@+id/txtview_plataforma"
             android:layout_width ="wrap_content"

@@ -5,20 +5,20 @@ import com.example.hospedajetema3.models.Juego
 object Respository {
     val listJuego : List<Juego> = listOf(
         Juego(
-            "FC 24", "PS5", "2023", "5.5", "fc_24"),
+            "1","FC 24", "PS5", "2023", "5.5", "fc_24"),
         Juego(
-            "BLACK OPS III", "PS4", "2015", "8", "bo3"),
+            "2","BLACK OPS III", "PS4", "2015", "8", "bo3"),
         Juego(
-            "ROCKET LEAGUE", "PS4", "2015", "7.5", "rocket_league"),
+            "3","ROCKET LEAGUE", "PS4", "2015", "7.5", "rocket_league"),
         Juego(
-            "GTA V", "PS4", "2013", "9.5", "gta_v"),
+            "4","GTA V", "PS4", "2013", "9.5", "gta_v"),
         Juego(
-            "GOLF IT", "PC", "2023", "9", "golf_it"),
+            "5","GOLF IT", "PC", "2023", "9", "golf_it"),
         Juego(
-            "CLASH ROYALE", "MOVIL", "2016", "10", "clash_royale"),
+            "6","CLASH ROYALE", "MOVIL", "2016", "10", "clash_royale"),
         Juego(
-            "SPIDERMAN 2", "PS5", "2023", "9.5", "spiderman_2"),
+            "7","SPIDERMAN 2", "PS5", "2023", "9.5", "spiderman_2"),
         Juego(
-            "GOD OF WAR", "PS5", "2022", "8.75", "god_of_war"),
+            "8","GOD OF WAR", "PS5", "2022", "8.75", "god_of_war"),
     )
 }

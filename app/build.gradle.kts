@@ -69,8 +69,13 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
+    implementation("androidx.fragment:fragment-ktx:1.3.6")
+
+    implementation("pub.devrel:easypermissions:3.0.0")
+
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
     testImplementation("junit:junit:4.13.2")
