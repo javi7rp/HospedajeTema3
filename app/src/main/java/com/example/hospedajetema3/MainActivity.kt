@@ -40,16 +40,38 @@ class MainActivity : AppCompatActivity() {
     private val navListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             var selectedFragment: Fragment? = null
+            var fragmentTag: String? = null
             when (item.itemId) {
-                R.id.nav_inicio -> selectedFragment = FragmentInicio()
-                R.id.nav_notas -> selectedFragment = FragmentNotas()
-                R.id.nav_fav -> selectedFragment = FragmentFav()
-                R.id.nav_perfil -> selectedFragment = FragmentPerfil()
+                R.id.nav_inicio -> {
+                    selectedFragment = FragmentInicio()
+                    fragmentTag = "FragmentInicioTag"
+                }
+                R.id.nav_notas -> {
+                    selectedFragment = FragmentNotas()
+                    fragmentTag = "FragmentNotasTag"
+                }
+                R.id.nav_fav -> {
+                    selectedFragment = FragmentFav()
+                    fragmentTag = "FragmentFavTag"
+                }
+                R.id.nav_perfil -> {
+                    selectedFragment = FragmentPerfil()
+                    fragmentTag = "FragmentPerfilTag"
+                }
             }
-            supportFragmentManager.beginTransaction()
+            val existingFragment = supportFragmentManager.findFragmentByTag(fragmentTag)
 
-                .replace(R.id.fragment_container,selectedFragment!!)
-                .commit()
+            if (existingFragment == null) {
+                // El fragmento no existe, así que crea una nueva transacción y agrégalo
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, selectedFragment!!, fragmentTag)
+                    .commit()
+            } else {
+                // El fragmento ya existe, así que simplemente muéstralo
+                supportFragmentManager.beginTransaction()
+                    .show(existingFragment)
+                    .commit()
+            }
             return@OnNavigationItemSelectedListener true
 
             true

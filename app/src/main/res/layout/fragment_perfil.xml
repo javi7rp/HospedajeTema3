@@ -83,7 +83,7 @@
         android:layout_alignParentBottom="true"
         android:src="@drawable/instagram"
         android:layout_marginStart="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginTop="16dp"
         android:background="@null"/>
 
@@ -105,9 +105,21 @@
         android:layout_alignParentBottom="true"
         android:src="@drawable/juego_preguntas"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginTop="16dp"
         android:background="@null"/>
+
+    <TextView
+        android:id="@+id/recordPreguntas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
+        android:text="PRIMER INTENTO: 7/10"
+        android:visibility="invisible"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

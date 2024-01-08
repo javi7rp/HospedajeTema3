@@ -45,6 +45,9 @@ class FragmentPerfil : Fragment() {
     private lateinit var btnCancel: Button
     private lateinit var btnBorrarDatos: Button
 
+    private lateinit var txtRecordPreguntas: TextView
+    var isResultadoActualizado = false
+
     private val CAMERA_REQUEST_CODE = 123
     private val RC_CAMERA_STORAGE_PERM = 124
     private val RC_PICK_IMAGE = 125
@@ -64,6 +67,7 @@ class FragmentPerfil : Fragment() {
         val view = inflater.inflate(R.layout.fragment_perfil, container, false)
 
         btnPreguntas = view.findViewById(R.id.btnPreguntas)
+        txtRecordPreguntas = view.findViewById(R.id.recordPreguntas)
         btnInstagram = view.findViewById(R.id.btnInstagram)
         txtInstaUser = view.findViewById(R.id.txtInstaUser)
         txtUserName = view.findViewById(R.id.txtUserName)
@@ -164,6 +168,14 @@ class FragmentPerfil : Fragment() {
         txtUserAge.text = nuevaEdad
         txtUserEmail.text = nuevoEmail
         txtInstaUser.text = nuevoInsta
+    }
+    fun actualizarResultado(contAciertos: Int) {
+        if (!isResultadoActualizado){
+            txtRecordPreguntas.visibility = View.VISIBLE
+            txtRecordPreguntas.setText("PRIMER INTENTO: $contAciertos/10")
+            isResultadoActualizado = true
+        }
+
     }
 
 
