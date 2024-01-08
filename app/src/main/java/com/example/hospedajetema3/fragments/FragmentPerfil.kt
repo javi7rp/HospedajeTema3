@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.hospedajetema3.GameActivity
 import com.example.hospedajetema3.R
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -27,6 +28,7 @@ class FragmentPerfil : Fragment() {
     private lateinit var ivProfilePicture: ImageView
     private lateinit var btnEditFoto: Button
 
+    private lateinit var btnPreguntas: ImageButton
     private lateinit var btnInstagram: ImageButton
     private lateinit var txtInstaUser: TextView
 
@@ -41,6 +43,7 @@ class FragmentPerfil : Fragment() {
     private lateinit var editTextNuevoInsta: EditText
     private lateinit var btnGuardar: Button
     private lateinit var btnCancel: Button
+    private lateinit var btnBorrarDatos: Button
 
     private val CAMERA_REQUEST_CODE = 123
     private val RC_CAMERA_STORAGE_PERM = 124
@@ -60,6 +63,7 @@ class FragmentPerfil : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_perfil, container, false)
 
+        btnPreguntas = view.findViewById(R.id.btnPreguntas)
         btnInstagram = view.findViewById(R.id.btnInstagram)
         txtInstaUser = view.findViewById(R.id.txtInstaUser)
         txtUserName = view.findViewById(R.id.txtUserName)
@@ -99,6 +103,11 @@ class FragmentPerfil : Fragment() {
         btnEditFoto.setOnClickListener {
             checkCameraAndStoragePermissions()
         }
+
+        btnPreguntas.setOnClickListener {
+            val intent = Intent(requireContext(), GameActivity::class.java)
+            startActivity(intent)
+        }
         return view
     }
 
@@ -113,12 +122,21 @@ class FragmentPerfil : Fragment() {
         editTextNuevoInsta = dialogView.findViewById(R.id.editTextInstaUser)
         btnGuardar = dialogView.findViewById(R.id.btnGuardar)
         btnCancel = dialogView.findViewById(R.id.btnCancel)
+        btnBorrarDatos = dialogView.findViewById(R.id.btnBorrarDatos)
+
 
 
         editTextNuevoNombre.setText(txtUserName.text)
         editTextNuevaEdad.setText(txtUserAge.text)
         editTextNuevoEmail.setText(txtUserEmail.text)
         editTextNuevoInsta.setText(txtInstaUser.text)
+
+        btnBorrarDatos.setOnClickListener {
+            editTextNuevoNombre.setText("")
+            editTextNuevaEdad.setText("")
+            editTextNuevoEmail.setText("")
+            editTextNuevoInsta.setText("")
+        }
 
         // Configura el diálogo
         btnGuardar.setOnClickListener{

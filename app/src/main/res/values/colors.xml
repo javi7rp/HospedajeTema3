@@ -10,7 +10,6 @@
     <color name="verde_claro">#82E0AA</color>
     <color name="verde_oscuro">#239B56</color>
     <color name="fondo_app">#115CC8</color>
-    <color name="fondo_lupa">#6D27CF</color>
-    <color name="fondo_notas">#58DA2A</color>
-    <color name="fondo_perfil">#1AE3B3</color>
+    <color name="fondo_notas">#5229BF</color>
+    <color name="fondo_perfil">#1B7A64</color>
 </resources>

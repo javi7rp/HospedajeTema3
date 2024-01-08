@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FragmentLupa"
-    android:background="@color/fondo_notas">
+    tools:context=".fragments.FragmentNotas"
+    android:background="@color/fondo_app">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,6 +18,6 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="300dp"
         android:gravity="center"
-        android:text="NOTAS" />
+        android:text="BUSCADOR" />
 
 </RelativeLayout>

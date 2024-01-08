@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hospedajetema3.R
@@ -29,6 +31,7 @@ class FragmentFav : Fragment() {
 
     private lateinit var controller: Controller
     private lateinit var binding: FragmentInicioBinding
+    private lateinit var tvNoFavoritos: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +58,7 @@ class FragmentFav : Fragment() {
         //val addButton = binding.btnAdd
         //controller.setAddButton(addButton)
 
+        tvNoFavoritos = binding.tvNoFavoritos
         initRecyclerView()
     }
 
@@ -64,16 +68,16 @@ class FragmentFav : Fragment() {
         myRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val juegosFav = controller.obtenerJuegosFav().toMutableList()
-
-
         val adapterFav = AdapterJuego(
             juegosFav,
-            {gameId -> controller.deleteJuego(gameId)},
-            {gameId -> controller.updateJuego(gameId)},
-            {gameId -> controller.toggleFav(gameId)},
+            { gameId -> controller.deleteJuego(gameId) },
+            { gameId -> controller.updateJuego(gameId) },
+            { gameId -> controller.toggleFav(gameId) },
         )
 
         myRecyclerView.adapter = adapterFav
+        tvNoFavoritos.visibility = if (juegosFav.isEmpty()) View.VISIBLE else View.GONE
     }
+
 
 }

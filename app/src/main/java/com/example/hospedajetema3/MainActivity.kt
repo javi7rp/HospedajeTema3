@@ -1,13 +1,23 @@
 package com.example.hospedajetema3
 
+
+
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.example.hospedajetema3.fragments.FragmentInicio
-import com.example.hospedajetema3.fragments.FragmentLupa
 import com.example.hospedajetema3.fragments.FragmentFav
+import com.example.hospedajetema3.fragments.FragmentInicio
+import com.example.hospedajetema3.fragments.FragmentNotas
 import com.example.hospedajetema3.fragments.FragmentPerfil
 import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,11 +27,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
+
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container,FragmentInicio())
             .commit()
+
+
     }
 
     private val navListener =
@@ -29,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             var selectedFragment: Fragment? = null
             when (item.itemId) {
                 R.id.nav_inicio -> selectedFragment = FragmentInicio()
-                R.id.nav_lupa -> selectedFragment = FragmentLupa()
+                R.id.nav_notas -> selectedFragment = FragmentNotas()
                 R.id.nav_fav -> selectedFragment = FragmentFav()
                 R.id.nav_perfil -> selectedFragment = FragmentPerfil()
             }
@@ -37,11 +50,47 @@ class MainActivity : AppCompatActivity() {
 
                 .replace(R.id.fragment_container,selectedFragment!!)
                 .commit()
+            return@OnNavigationItemSelectedListener true
 
             true
         }
 
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            //showToast("boton seleccionado")
+            R.id.action_settings -> openSystemSettings()
+            R.id.action_about -> showAboutDialog()
+            R.id.action_exit -> exitApp()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun openSystemSettings() {
+        val intent = Intent(Settings.ACTION_SETTINGS)
+        startActivity(intent)
+    }
+    private fun showAboutDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Acerca de la app")
+        builder.setMessage("VIDEOJUEGOS JAVI\n" +
+                "Desarrollado por: Javi Redondo\n\n" +
+                "Versión actual: 1.3\n\n" +
+                "Para mas informacion, visite: JaviAppProyectoFinal.com\n")
+        builder.setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+        builder.show()
+    }
+    private fun exitApp() {
+        System.exit(0)
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
     /*
     //metodo con hide y show()
     private lateinit var bottomNavigationView: BottomNavigationView
