@@ -2,6 +2,7 @@ package com.example.hospedajetema3
 
 
 
+import FragmentNotas
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -14,7 +15,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.hospedajetema3.fragments.FragmentFav
 import com.example.hospedajetema3.fragments.FragmentInicio
-import com.example.hospedajetema3.fragments.FragmentNotas
 import com.example.hospedajetema3.fragments.FragmentPerfil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

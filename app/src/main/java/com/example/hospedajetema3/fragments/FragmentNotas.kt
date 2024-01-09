@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.example.hospedajetema3.R
-import com.example.hospedajetema3.fragments.fragment_notas.CalendarFragment
-import com.example.hospedajetema3.fragments.fragment_notas.NotesFragment
-import com.example.hospedajetema3.fragments.fragment_notas.OtherFragment
-import com.example.hospedajetema3.fragments.fragment_notas.RewardFragment
+import com.example.hospedajetema3.fragments.fragment_notes.CalendarFragment
+import com.example.hospedajetema3.fragments.fragment_notes.NotesFragment
+import com.example.hospedajetema3.fragments.fragment_notes.OtherFragment
 
 class FragmentNotas : Fragment() {
 
