@@ -1,11 +1,15 @@
-package com.example.hospedajetema3.fragments
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.example.hospedajetema3.R
+import com.example.hospedajetema3.fragments.fragment_notas.CalendarFragment
+import com.example.hospedajetema3.fragments.fragment_notas.NotesFragment
+import com.example.hospedajetema3.fragments.fragment_notas.OtherFragment
+import com.example.hospedajetema3.fragments.fragment_notas.RewardFragment
 
 class FragmentNotas : Fragment() {
 
@@ -13,8 +17,41 @@ class FragmentNotas : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notas, container, false)
+        val view = inflater.inflate(R.layout.fragment_notas, container, false)
+
+        val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
+        val tabLayout = view.findViewById<TabLayout>(R.id.tabLayout)
+
+        // Configurar ViewPager con su adaptador personalizado
+        viewPager.adapter = MyPagerAdapter(childFragmentManager)
+
+        // Vincular el TabLayout con el ViewPager
+        tabLayout.setupWithViewPager(viewPager)
+
+        return view
     }
 
+    private class MyPagerAdapter(fm: androidx.fragment.app.FragmentManager) :
+        androidx.fragment.app.FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+        override fun getCount(): Int {
+            return 4 // Número total de fragmentos
+        }
+
+        override fun getItem(position: Int): androidx.fragment.app.Fragment {
+            // Retorna el Fragment correspondiente a cada posición
+            return when (position) {
+                0 -> NotesFragment()
+                1 -> OtherFragment()
+                2 -> RewardFragment()
+                3 -> CalendarFragment()
+                else -> NotesFragment()
+            }
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? {
+            // Títulos para las pestañas
+            return "Sección ${position + 1}"
+        }
+    }
 }
