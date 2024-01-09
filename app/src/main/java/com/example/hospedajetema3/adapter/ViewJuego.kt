@@ -59,6 +59,7 @@ class ViewJuego (view: View,
             Log.i("aaaa" , "pulsado en fav")
             addFav(gameId)
 
+            /*
             if (context is AppCompatActivity){
                 val currentFragment = context.supportFragmentManager.findFragmentById(R.id.fragment_container)
 
@@ -71,6 +72,8 @@ class ViewJuego (view: View,
                     transaction.commit()
                 }
             }
+
+             */
         }
 
     }

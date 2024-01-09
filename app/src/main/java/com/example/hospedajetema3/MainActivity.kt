@@ -22,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
 
+    /*
     //mi metodo con el problema de se resetea el fragmento cada vez que navegas en el menu
     private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +78,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+     */
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
@@ -110,14 +113,12 @@ class MainActivity : AppCompatActivity() {
     private fun exitApp() {
         System.exit(0)
     }
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-    /*
+
+
     //metodo con hide y show()
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var fragmentInicio: FragmentInicio
-    private lateinit var fragmentLupa: FragmentLupa
+    private lateinit var fragmentNotas: FragmentNotas
     private lateinit var fragmentFav: FragmentFav
     private lateinit var fragmentPerfil: FragmentPerfil
 
@@ -130,7 +131,7 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializa los fragmentos
         fragmentInicio = FragmentInicio()
-        fragmentLupa = FragmentLupa()
+        fragmentNotas = FragmentNotas()
         fragmentFav = FragmentFav()
         fragmentPerfil = FragmentPerfil()
 
@@ -138,14 +139,14 @@ class MainActivity : AppCompatActivity() {
             // Añade el fragmento inicial
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, fragmentPerfil)
-                .add(R.id.fragment_container, fragmentLupa)
+                .add(R.id.fragment_container, fragmentNotas)
                 .add(R.id.fragment_container,fragmentInicio)
                 .add(R.id.fragment_container, fragmentFav)
                 .commit()
 
             // Oculta todos los fragmentos excepto el inicial
             supportFragmentManager.beginTransaction()
-                .hide(fragmentLupa)
+                .hide(fragmentNotas)
                 .hide(fragmentFav)
                 .hide(fragmentPerfil)
                 .commit()
@@ -158,7 +159,7 @@ class MainActivity : AppCompatActivity() {
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_inicio -> showFragment(fragmentInicio)
-                R.id.nav_lupa -> showFragment(fragmentLupa)
+                R.id.nav_notas -> showFragment(fragmentNotas)
                 R.id.nav_fav -> showFragment(fragmentFav)
                 R.id.nav_perfil -> showFragment(fragmentPerfil)
             }
@@ -169,7 +170,7 @@ class MainActivity : AppCompatActivity() {
         // Oculta todos los fragmentos
         supportFragmentManager.beginTransaction()
             .hide(fragmentInicio)
-            .hide(fragmentLupa)
+            .hide(fragmentNotas)
             .hide(fragmentFav)
             .hide(fragmentPerfil)
             .commit()
@@ -180,11 +181,5 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
-    }
-    */
 
 }
