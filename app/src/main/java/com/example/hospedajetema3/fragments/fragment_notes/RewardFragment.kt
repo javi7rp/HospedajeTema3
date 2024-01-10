@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hospedajetema3.R
@@ -13,7 +14,6 @@ import kotlin.random.Random
 
 class RewardFragment : Fragment() {
 
-    private lateinit var imageView: ImageView
     private lateinit var imageButton: ImageButton
     private lateinit var handler: Handler
     private var isOnState = false // Comienza en off
@@ -37,32 +37,18 @@ class RewardFragment : Fragment() {
                 // Cambia el estado de la recompensa de on a off
                 isOnState = false
                 updateImageButton()
-                Toast.makeText(context, "RECOMPENSA RECLAMADA", Toast.LENGTH_SHORT).show()
-                n = Random.nextInt(6)
-                when (n){
-                    1 -> {
-                        imageView = view.findViewById(R.id.reward_1)
-                        imageView.visibility = View.VISIBLE
-                    }
-                    2 -> {
-                        imageView = view.findViewById(R.id.reward_2)
-                        imageView.visibility = View.VISIBLE
-                    }
-                    3 -> {
-                        imageView = view.findViewById(R.id.reward_3)
-                        imageView.visibility = View.VISIBLE
-                    }
-                    4 -> {
-                        imageView = view.findViewById(R.id.reward_4)
-                        imageView.visibility = View.VISIBLE
-                    }
-                    5 -> {
-                        imageView = view.findViewById(R.id.reward_5)
-                        imageView.visibility = View.VISIBLE
-                    }
-                }
+                n = Random.nextInt(20)+1
+                Toast.makeText(context, "RECOMPENSA RECLAMADA POS: $n", Toast.LENGTH_SHORT).show()
+                //showCartaDialog()
+                val imagenId = "reward_$n"
+                val resourceImageId = resources.getIdentifier(imagenId, "id", requireContext().packageName)
+                val imageView = view.findViewById<ImageView>(resourceImageId)
+                imageView.visibility = View.VISIBLE
 
-
+                val textId = "rewardCont_$n"
+                val resourceTextId = resources.getIdentifier(textId, "id", requireContext().packageName)
+                val textView = view.findViewById<TextView>(resourceTextId)
+                textView.visibility = View.VISIBLE
 
             } else {
                 handler.removeCallbacks(imageChanger)
