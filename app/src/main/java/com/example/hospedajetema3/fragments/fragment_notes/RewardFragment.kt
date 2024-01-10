@@ -48,8 +48,10 @@ class RewardFragment : Fragment() {
                 imageView.visibility = View.VISIBLE
 
 
-
-
+                if (contR[n] == 10){
+                    contR[n] = 1
+                    //showDialogo
+                }
                 val textId = "rewardCont_$n"
                 val resourceTextId = resources.getIdentifier(textId, "id", requireContext().packageName)
                 val textView = view.findViewById<TextView>(resourceTextId)
