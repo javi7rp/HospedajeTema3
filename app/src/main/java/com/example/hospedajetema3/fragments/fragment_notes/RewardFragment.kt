@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hospedajetema3.R
+import kotlin.random.Random
 
 class RewardFragment : Fragment() {
 
@@ -16,7 +17,7 @@ class RewardFragment : Fragment() {
     private lateinit var imageButton: ImageButton
     private lateinit var handler: Handler
     private var isOnState = false // Comienza en off
-    private var cont = 0
+    private var n = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +38,31 @@ class RewardFragment : Fragment() {
                 isOnState = false
                 updateImageButton()
                 Toast.makeText(context, "RECOMPENSA RECLAMADA", Toast.LENGTH_SHORT).show()
-                insertarImagen(cont)
-                cont++
+                n = Random.nextInt(6)
+                when (n){
+                    1 -> {
+                        imageView = view.findViewById(R.id.reward_1)
+                        imageView.visibility = View.VISIBLE
+                    }
+                    2 -> {
+                        imageView = view.findViewById(R.id.reward_2)
+                        imageView.visibility = View.VISIBLE
+                    }
+                    3 -> {
+                        imageView = view.findViewById(R.id.reward_3)
+                        imageView.visibility = View.VISIBLE
+                    }
+                    4 -> {
+                        imageView = view.findViewById(R.id.reward_4)
+                        imageView.visibility = View.VISIBLE
+                    }
+                    5 -> {
+                        imageView = view.findViewById(R.id.reward_5)
+                        imageView.visibility = View.VISIBLE
+                    }
+                }
+
+
 
             } else {
                 handler.removeCallbacks(imageChanger)
@@ -49,11 +73,7 @@ class RewardFragment : Fragment() {
         return view
     }
 
-    private fun insertarImagen(cont: Int) {
-        val imageViewId = resources.getIdentifier("reward_$cont", "id", requireContext().packageName)
-        imageView = view.findViewById(imageViewId)
-        imageView.setVisibility(View.VISIBLE);
-    }
+
 
     // Runnable para cambiar la imagen después de cierto tiempo
     private val imageChanger = object : Runnable {
