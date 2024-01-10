@@ -27,6 +27,7 @@ class RewardFragment : Fragment() {
 
         imageButton = view.findViewById(R.id.reclamarReward)
         handler = Handler()
+        val contR = IntArray(20) { 0 }
 
         updateImageButton()
 
@@ -37,17 +38,22 @@ class RewardFragment : Fragment() {
                 // Cambia el estado de la recompensa de on a off
                 isOnState = false
                 updateImageButton()
-                n = Random.nextInt(20)+1
+                n = Random.nextInt(4)+1
                 Toast.makeText(context, "RECOMPENSA RECLAMADA POS: $n", Toast.LENGTH_SHORT).show()
+                contR[n] += 1
                 //showCartaDialog()
                 val imagenId = "reward_$n"
                 val resourceImageId = resources.getIdentifier(imagenId, "id", requireContext().packageName)
                 val imageView = view.findViewById<ImageView>(resourceImageId)
                 imageView.visibility = View.VISIBLE
 
+
+
+
                 val textId = "rewardCont_$n"
                 val resourceTextId = resources.getIdentifier(textId, "id", requireContext().packageName)
                 val textView = view.findViewById<TextView>(resourceTextId)
+                textView.setText("x"+contR[n].toString())
                 textView.visibility = View.VISIBLE
 
             } else {
