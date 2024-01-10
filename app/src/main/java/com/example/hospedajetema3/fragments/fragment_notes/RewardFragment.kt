@@ -4,15 +4,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hospedajetema3.R
 
 class RewardFragment : Fragment() {
 
+    private lateinit var imageView: ImageView
     private lateinit var imageButton: ImageButton
     private lateinit var handler: Handler
     private var isOnState = false // Comienza en off
+    private var cont = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +29,7 @@ class RewardFragment : Fragment() {
 
         updateImageButton()
 
-        handler.postDelayed(imageChanger, 10000)
+        handler.postDelayed(imageChanger, 2000)
 
         imageButton.setOnClickListener {
             if (isOnState) {
@@ -33,14 +37,22 @@ class RewardFragment : Fragment() {
                 isOnState = false
                 updateImageButton()
                 Toast.makeText(context, "RECOMPENSA RECLAMADA", Toast.LENGTH_SHORT).show()
+                insertarImagen(cont)
+                cont++
 
             } else {
                 handler.removeCallbacks(imageChanger)
-                handler.postDelayed(imageChanger, 10000)
+                handler.postDelayed(imageChanger, 2000)
             }
         }
 
         return view
+    }
+
+    private fun insertarImagen(cont: Int) {
+        val imageViewId = resources.getIdentifier("reward_$cont", "id", requireContext().packageName)
+        imageView = view.findViewById(imageViewId)
+        imageView.setVisibility(View.VISIBLE);
     }
 
     // Runnable para cambiar la imagen después de cierto tiempo
@@ -49,7 +61,7 @@ class RewardFragment : Fragment() {
             isOnState = true
             updateImageButton()
 
-            handler.postDelayed(this, 10000) // Cambia la imagen cada 2 segundos
+            handler.postDelayed(this, 2000) // Cambia la imagen cada 2 segundos
         }
     }
 
