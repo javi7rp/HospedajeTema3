@@ -42,7 +42,7 @@ class GameActivity : AppCompatActivity(){
             "¿Cuál NO es una carta del Clash Royale?",
             listOf("Bolero", "Montapuercos", "Bruja Arquera", "Príncipe Oscuro"),
             "Bruja Arquera"
-        )/*,
+        ),
         Pregunta(
             "¿Cuál de los siguientes elementos químicos es un gas noble?",
             listOf("Hierro", "Helio", "Sodio", "Oxígeno"),
@@ -56,7 +56,7 @@ class GameActivity : AppCompatActivity(){
         Pregunta(
             "¿Cuál es el río más largo del mundo?",
             listOf("Amazonas", "Nilo", "Yangtsé", "Misisipi"),
-            "Amazonas"
+            "Nilo"
         ),
         Pregunta(
             "¿Quién pintó la Mona Lisa?",
@@ -88,7 +88,7 @@ class GameActivity : AppCompatActivity(){
             listOf("Microsoft", "Google", "Apple", "IBM"),
             "Apple"
         )
-        */
+
     )
 
     private fun showQuestion(questionIndex: Int, question: String, options: List<String>, correctAnswer: String) {

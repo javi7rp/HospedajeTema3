@@ -202,7 +202,7 @@
                     android:id="@+id/reward_9"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_pele"
+                    android:src="@drawable/salah"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_9"
@@ -221,7 +221,7 @@
                     android:id="@+id/reward_10"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_r9"
+                    android:src="@drawable/suarez"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_10"
@@ -241,7 +241,7 @@
                     android:id="@+id/reward_11"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_messi"
+                    android:src="@drawable/ramos"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_11"
@@ -260,7 +260,7 @@
                     android:id="@+id/reward_12"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_cr7"
+                    android:src="@drawable/mbappe"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_12"
@@ -286,7 +286,7 @@
                     android:id="@+id/reward_13"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_neymar"
+                    android:src="@drawable/van_dijk"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_13"
@@ -305,7 +305,7 @@
                     android:id="@+id/reward_14"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_casillas"
+                    android:src="@drawable/dybala"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_14"
@@ -324,7 +324,7 @@
                     android:id="@+id/reward_15"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_maldini"
+                    android:src="@drawable/smalling"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_15"
@@ -344,7 +344,7 @@
                     android:id="@+id/reward_16"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_dinho"
+                    android:src="@drawable/bailly"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_16"
@@ -370,7 +370,7 @@
                     android:id="@+id/reward_17"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_neymar"
+                    android:src="@drawable/ibarbo"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_17"
@@ -389,7 +389,7 @@
                     android:id="@+id/reward_18"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_casillas"
+                    android:src="@drawable/doumbia"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_18"
@@ -408,7 +408,7 @@
                     android:id="@+id/reward_19"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_maldini"
+                    android:src="@drawable/gervinho"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_19"
@@ -427,7 +427,7 @@
                     android:id="@+id/reward_20"
                     android:layout_width="85dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/reward_dinho"
+                    android:src="@drawable/butland"
                     android:visibility="invisible"/>
                 <TextView
                     android:id="@+id/rewardCont_20"
