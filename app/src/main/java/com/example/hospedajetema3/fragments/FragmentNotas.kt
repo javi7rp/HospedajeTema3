@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.example.hospedajetema3.R
-import com.example.hospedajetema3.fragments.fragment_notes.CalendarFragment
+import com.example.hospedajetema3.fragments.fragment_notes.InsigniasFragment
 import com.example.hospedajetema3.fragments.fragment_notes.NotesFragment
 import com.example.hospedajetema3.fragments.fragment_notes.OtherFragment
 
@@ -43,14 +43,19 @@ class FragmentNotas : Fragment() {
                 0 -> NotesFragment()
                 1 -> OtherFragment()
                 2 -> RewardFragment()
-                3 -> CalendarFragment()
+                3 -> InsigniasFragment()
                 else -> NotesFragment()
             }
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            // Títulos para las pestañas
-            return "Sección ${position + 1}"
+            return when (position) {
+                0 -> "Notas"
+                1 -> "Otro"
+                2 -> "Coleccion"
+                3 -> "Insignias"
+                else -> "Sección ${position + 1}"
+            }
         }
     }
 }

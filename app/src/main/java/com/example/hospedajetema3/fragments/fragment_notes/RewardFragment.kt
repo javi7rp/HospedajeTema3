@@ -197,7 +197,7 @@ class RewardFragment : Fragment() {
         radioGroup1.orientation = RadioGroup.HORIZONTAL
 
         val radioButton1 = RadioButton(context)
-        radioButton1.text = "Imagen 1"
+        radioButton1.text = "Carta 1"
         radioGroup1.addView(radioButton1)
 
         val newImageView1 = ImageView(context)
@@ -216,7 +216,7 @@ class RewardFragment : Fragment() {
         radioGroup2.orientation = RadioGroup.HORIZONTAL
 
         val radioButton2 = RadioButton(context)
-        radioButton2.text = "Imagen 2"
+        radioButton2.text = "Carta 2"
         radioGroup2.addView(radioButton2)
 
         val newImageView2 = ImageView(context)
@@ -229,7 +229,7 @@ class RewardFragment : Fragment() {
         mainLayout.addView(layout1)
         mainLayout.addView(layout2)
 
-        alertDialogBuilder.setPositiveButton("Confirmar") { _, _ ->
+        alertDialogBuilder.setPositiveButton("CONFIRMAR") { _, _ ->
             val selectedOption = when {
                 radioButton1.isChecked -> 1
                 radioButton2.isChecked -> 2
