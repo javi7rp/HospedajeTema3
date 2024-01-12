@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hospedajetema3.fragments.FragmentPerfil
 import com.example.hospedajetema3.models.Pregunta
+import com.example.hospedajetema3.objects_models.Variables
 
 class GameActivity : AppCompatActivity(){
     private lateinit var questionTextView: TextView
@@ -43,6 +44,7 @@ class GameActivity : AppCompatActivity(){
             listOf("Bolero", "Montapuercos", "Bruja Arquera", "Príncipe Oscuro"),
             "Bruja Arquera"
         ),
+        /*
         Pregunta(
             "¿Cuál de los siguientes elementos químicos es un gas noble?",
             listOf("Hierro", "Helio", "Sodio", "Oxígeno"),
@@ -88,6 +90,8 @@ class GameActivity : AppCompatActivity(){
             listOf("Microsoft", "Google", "Apple", "IBM"),
             "Apple"
         )
+
+         */
 
     )
 
@@ -164,9 +168,13 @@ class GameActivity : AppCompatActivity(){
     }
     private fun showFinalDialog(contAciertos: Int) {
 
+        if (contAciertos == listaDePreguntas.size){
+            Variables.allPreguntas ++
+        }
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle("FIN DEL JUEGO")
-        builder.setMessage("HAS ACERTADO: " + contAciertos + "/10")
+        builder.setMessage("HAS ACERTADO: " + contAciertos + "/" + questionCounter)
         builder.setPositiveButton("TERMINAR") { dialog, _ ->
             dialog.dismiss()
             finish()

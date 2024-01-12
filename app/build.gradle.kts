@@ -73,9 +73,12 @@ dependencies {
 
     implementation("pub.devrel:easypermissions:3.0.0")
 
+    implementation("com.google.android.material:material:1.0.0")
+
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.drawerlayout:drawerlayout:1.2.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 
     testImplementation("junit:junit:4.13.2")

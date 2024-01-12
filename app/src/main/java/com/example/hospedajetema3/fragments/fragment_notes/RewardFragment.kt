@@ -18,6 +18,7 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.hospedajetema3.R
+import com.example.hospedajetema3.objects_models.Variables
 import java.util.concurrent.CompletableFuture
 import kotlin.random.Random
 
@@ -25,6 +26,7 @@ import kotlin.random.Random
 class RewardFragment : Fragment() {
 
     private lateinit var imageButton: ImageButton
+    private lateinit var btnComprobar: Button
     private lateinit var handler: Handler
     private var isOnState = false // Comienza en off
     private var n = 1
@@ -38,6 +40,7 @@ class RewardFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_reward, container, false)
 
+        btnComprobar = view.findViewById(R.id.btnComprobar)
         imageButton = view.findViewById(R.id.reclamarReward)
         handler = Handler()
         val contR = IntArray(20) { 0 }
@@ -46,8 +49,18 @@ class RewardFragment : Fragment() {
 
         handler.postDelayed(imageChanger, 2000)
 
+        btnComprobar.setOnClickListener{
+            if (contR.all { it > 0 }){
+                resetearColeccion(view, contR)
+                Variables.colectAll ++
+            }else{
+                Toast.makeText(context, "Todavia no has completado la coleccion", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         imageButton.setOnClickListener {
             if (isOnState) {
+                Variables.rewardDaily++
                 // Cambia el estado de la recompensa de on a off
                 isOnState = false
                 updateImageButton()
@@ -155,6 +168,21 @@ class RewardFragment : Fragment() {
         val textView = view.findViewById<TextView>(resourceTextId)
         textView.setText("x" + contR[num - 1].toString())
         textView.visibility = View.VISIBLE
+    }
+    private fun resetearColeccion(view: View,contR: IntArray) {
+        for (i in 1 until 21) {
+            contR[i] = 0
+            val textId = "rewardCont_$i"
+            val resourceTextId = resources.getIdentifier(textId, "id", requireContext().packageName)
+            val textView = view.findViewById<TextView>(resourceTextId)
+            textView.visibility = View.INVISIBLE
+
+            val imagenId = "reward_$i"
+            val resourceImageId = resources.getIdentifier(imagenId, "id", requireContext().packageName)
+            val imageView = view.findViewById<ImageView>(resourceImageId)
+            imageView.visibility = View.INVISIBLE
+        }
+
     }
 
     fun comprobarPorDiez(n : Int) : Boolean {
