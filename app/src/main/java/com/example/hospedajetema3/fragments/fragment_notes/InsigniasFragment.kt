@@ -39,7 +39,7 @@ class InsigniasFragment : Fragment(), Observador{
 
         insigniaButton1.setOnClickListener { showInsigniaDialog("COLECCION", "HAS CONSEGUIDO TODA LA COLECCION UN TOTAL DE ${Variables.colectAll} VECES") }
         insigniaButton2.setOnClickListener { showInsigniaDialog("PREGUNTAS", "HAS RESPONDIDO TODAS LAS PREGUNTAS BIEN UN TOTAL DE ${Variables.allPreguntas} VECES") }
-        insigniaButton3.setOnClickListener { showInsigniaDialog("REWARD DIARIAS", "HAS OBTENIDO UN TOTAL DE ${Variables.rewardDaily} RECOMPENSAS") }
+        insigniaButton3.setOnClickListener { showInsigniaDialog("CARTAS", "HAS OBTENIDO UN TOTAL DE ${Variables.rewardDaily} CARTAS") }
     }
 
     private fun showInsigniaDialog(title: String, message: String) {

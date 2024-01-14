@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.hospedajetema3.fragments.FragmentPerfil
 import com.example.hospedajetema3.models.Pregunta
 import com.example.hospedajetema3.objects_models.Variables
+import java.util.Random
 
 class GameActivity : AppCompatActivity(){
     private lateinit var questionTextView: TextView
@@ -44,21 +45,30 @@ class GameActivity : AppCompatActivity(){
             listOf("Bolero", "Montapuercos", "Bruja Arquera", "Príncipe Oscuro"),
             "Bruja Arquera"
         ),
-        /*
         Pregunta(
-            "¿Cuál de los siguientes elementos químicos es un gas noble?",
-            listOf("Hierro", "Helio", "Sodio", "Oxígeno"),
-            "Helio"
+            "¿En qué año se llevó a cabo la Revolución Rusa?",
+            listOf("1917", "1923", "1905", "1945"),
+            "1917"
         ),
         Pregunta(
-            "¿En qué año se firmó la Declaración de Independencia de los Estados Unidos?",
-            listOf("1776", "1789", "1804", "1812"),
-            "1776"
+            "¿Quién escribió 'Romeo y Julieta'?",
+            listOf("Charles Dickens", "William Shakespeare", "Jane Austen", "Fyodor Dostoevsky"),
+            "William Shakespeare"
         ),
         Pregunta(
-            "¿Cuál es el río más largo del mundo?",
-            listOf("Amazonas", "Nilo", "Yangtsé", "Misisipi"),
-            "Nilo"
+            "¿Cuál es el océano más grande del mundo?",
+            listOf("Océano Atlántico", "Océano Índico", "Océano Pacífico", "Océano Ártico"),
+            "Océano Pacífico"
+        ),
+        Pregunta(
+            "¿En qué año se fundó la Organización de las Naciones Unidas (ONU)?",
+            listOf("1920", "1945", "1960", "1980"),
+            "1945"
+        ),
+        Pregunta(
+            "¿Cuál es el elemento más abundante en la Tierra?",
+            listOf("Hierro", "Oxígeno", "Silicio", "Aluminio"),
+            "Oxígeno"
         ),
         Pregunta(
             "¿Quién pintó la Mona Lisa?",
@@ -66,34 +76,131 @@ class GameActivity : AppCompatActivity(){
             "Leonardo da Vinci"
         ),
         Pregunta(
-            "¿Cuál es la obra más famosa de William Shakespeare?",
-            listOf("Hamlet", "Don Quijote", "Romeo y Julieta", "Orgullo y prejuicio"),
-            "Romeo y Julieta"
+            "¿En qué país se encuentra la Gran Muralla China?",
+            listOf("India", "Japón", "China", "Corea del Sur"),
+            "China"
         ),
         Pregunta(
-            "¿Quién es conocido como el 'Rey del Pop'?",
+            "¿Cuál es el río más largo del mundo?",
+            listOf("Amazonas", "Nilo", "Yangtsé", "Misisipi"),
+            "Amazonas"
+        ),
+        Pregunta(
+            "¿Quién fue el primer presidente de Estados Unidos?",
+            listOf("Thomas Jefferson", "Abraham Lincoln", "George Washington", "John Adams"),
+            "George Washington"
+        ),
+        Pregunta(
+            "¿Cuál es el instrumento musical más antiguo del mundo?",
+            listOf("Flauta", "Tambor", "Lira", "Arpa"),
+            "Flauta"
+        ),
+        Pregunta(
+            "¿Qué planeta es conocido como el 'Planeta Rojo'?",
+            listOf("Venus", "Júpiter", "Marte", "Saturno"),
+            "Marte"
+        ),
+        Pregunta(
+            "¿Cuál es la capital de Francia?",
+            listOf("Berlín", "Madrid", "París", "Roma"),
+            "París"
+        ),
+        Pregunta(
+            "¿En qué año se firmó la Declaración de Independencia de Estados Unidos?",
+            listOf("1776", "1789", "1804", "1812"),
+            "1776"
+        ),
+        Pregunta(
+            "¿Cuál es la montaña más alta del mundo?",
+            listOf("Mont Blanc", "Kilimanjaro", "Everest", "Aconcagua"),
+            "Everest"
+        ),
+        Pregunta(
+            "¿Quién es conocido como 'El Rey del Pop'?",
             listOf("Elvis Presley", "Michael Jackson", "Madonna", "The Beatles"),
             "Michael Jackson"
         ),
         Pregunta(
-            "¿En qué deporte se utiliza una pala para golpear una pelota sobre una red?",
-            listOf("Tenis", "Golf", "Ping Pong", "Bádminton"),
-            "Ping Pong"
+            "¿En qué año comenzó la Segunda Guerra Mundial?",
+            listOf("1914", "1939", "1945", "1950"),
+            "1939"
         ),
         Pregunta(
-            "¿Cuál es la capital de Australia?",
-            listOf("Sídney", "Melbourne", "Canberra", "Brisbane"),
-            "Canberra"
+            "¿Cuál es el componente principal del aire?",
+            listOf("Nitrógeno", "Oxígeno", "Dióxido de carbono", "Argón"),
+            "Nitrógeno"
         ),
         Pregunta(
-            "¿Cuál de las siguientes compañías fue fundada por Steve Jobs, Steve Wozniak y Ronald Wayne?",
-            listOf("Microsoft", "Google", "Apple", "IBM"),
-            "Apple"
+            "¿Quién escribió 'Don Quijote de la Mancha'?",
+            listOf("Miguel de Cervantes", "Gabriel García Márquez", "William Faulkner", "Jane Austen"),
+            "Miguel de Cervantes"
+        ),
+        Pregunta(
+            "¿Cuál es el metal más abundante en la corteza terrestre?",
+            listOf("Hierro", "Oro", "Plata", "Aluminio"),
+            "Hierro"
+        ),
+        Pregunta(
+            "¿Qué país es conocido como la 'Tierra del Sol Naciente'?",
+            listOf("China", "India", "Japón", "Corea del Sur"),
+            "Japón"
+        ),
+        Pregunta(
+            "¿Cuál es la capital de Rusia?",
+            listOf("Moscú", "San Petersburgo", "Kiev", "Minsk"),
+            "Moscú"
+        ),
+        Pregunta(
+            "¿En qué año se produjo la Revolución Industrial?",
+            listOf("1600", "1750", "1850", "1900"),
+            "1850"
+        ),
+        Pregunta(
+            "¿Quién fue el primer ser humano en viajar al espacio?",
+            listOf("Yuri Gagarin", "Neil Armstrong", "Buzz Aldrin", "Valentina Tereshkova"),
+            "Yuri Gagarin"
+        ),
+        Pregunta(
+            "¿Cuál es el país más grande del mundo en términos de superficie terrestre?",
+            listOf("Estados Unidos", "China", "Canadá", "Rusia"),
+            "Rusia"
+        ),
+        Pregunta(
+            "¿Qué elemento químico tiene el símbolo 'Fe'?",
+            listOf("Hierro", "Oro", "Plata", "Mercurio"),
+            "Hierro"
+        ),
+        Pregunta(
+            "¿Cuál es el continente más grande del mundo?",
+            listOf("África", "Asia", "América del Norte", "Europa"),
+            "Asia"
+        ),
+        Pregunta(
+            "¿Quién fue el primer presidente de México?",
+            listOf("Miguel Hidalgo", "Benito Juárez", "Porfirio Díaz", "Agustín de Iturbide"),
+            "Agustín de Iturbide"
+        ),
+        Pregunta(
+            "¿En qué año se llevó a cabo la Revolución Mexicana?",
+            listOf("1810", "1821", "1910", "1920"),
+            "1910"
+        ),
+        Pregunta(
+            "¿Cuál es el desierto más grande del mundo?",
+            listOf("Atacama", "Gobi", "Sáhara", "Kalahari"),
+            "Sáhara"
+        ),
+        Pregunta(
+            "¿Quién fue el primer emperador romano?",
+            listOf("Julio César", "Marco Aurelio", "Augusto", "Nerón"),
+            "Augusto"
         )
 
-         */
-
     )
+
+    private fun obtener10PreguntasAzar():List<Pregunta>{
+        return listaDePreguntas.shuffled(Random()).take(10)
+    }
 
     private fun showQuestion(questionIndex: Int, question: String, options: List<String>, correctAnswer: String) {
         // Muestra la pregunta
@@ -131,13 +238,12 @@ class GameActivity : AppCompatActivity(){
             contAciertosTextView.setText("Aciertos: " + (contAciertos) + "/" + questionCounter)
 
         }
-
-
-
-
     }
+
+
     private fun showNextQuestion() {
-        val nextQuestion = listaDePreguntas[questionCounter]
+        val preguntasAzar = obtener10PreguntasAzar()
+        val nextQuestion = preguntasAzar[questionCounter]
         showQuestion(
             questionCounter,
             nextQuestion.pregunta,
@@ -156,7 +262,7 @@ class GameActivity : AppCompatActivity(){
 
         builder.setPositiveButton("ACEPTAR") { dialog, _ -> dialog.dismiss()
             //Muestra la siguiente pregunta (puedes implementar esta lógica según tu estructura de juego)
-            if (questionCounter < listaDePreguntas.size){
+            if (questionCounter < 10){
                 showNextQuestion()
             }else{
                 showFinalDialog(contAciertos)
@@ -168,7 +274,7 @@ class GameActivity : AppCompatActivity(){
     }
     private fun showFinalDialog(contAciertos: Int) {
 
-        if (contAciertos == listaDePreguntas.size){
+        if (contAciertos == 10){
             Variables.allPreguntas ++
         }
 

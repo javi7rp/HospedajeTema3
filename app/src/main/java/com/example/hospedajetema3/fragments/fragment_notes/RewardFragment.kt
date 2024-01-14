@@ -29,7 +29,7 @@ class RewardFragment : Fragment() {
     private lateinit var btnComprobar: Button
     private lateinit var handler: Handler
     private var isOnState = false // Comienza en off
-    private var n = 1
+    private var n = 0
     private var aux = 0
     private var x = 0
     private var y = 0
@@ -53,6 +53,7 @@ class RewardFragment : Fragment() {
             if (contR.all { it > 0 }){
                 resetearColeccion(view, contR)
                 Variables.colectAll ++
+                Toast.makeText(context, "ENHORABUENA! HAS COMPLETADO LA COLECCION", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(context, "Todavia no has completado la coleccion", Toast.LENGTH_SHORT).show()
             }
@@ -64,8 +65,22 @@ class RewardFragment : Fragment() {
                 // Cambia el estado de la recompensa de on a off
                 isOnState = false
                 updateImageButton()
+                //programa real:
                 aux = Random.nextInt(100)+1
                 n = convertirIndiceRamdon(aux)
+
+                /*
+                //programa pruebas:
+                for (i in 1 until 21) {
+                    contR[i-1] = 1
+                    val imagenId = "reward_$i"
+                    val resourceImageId = resources.getIdentifier(imagenId, "id", requireContext().packageName)
+                    val imageView = view.findViewById<ImageView>(resourceImageId)
+                    imageView.visibility = View.VISIBLE
+                }
+                 */
+
+
                 //n = 12 valor fijo
                 //Toast.makeText(context, "RECOMPENSA RECLAMADA POS: $n", Toast.LENGTH_SHORT).show()
                 contR[n-1] += 1
@@ -100,8 +115,22 @@ class RewardFragment : Fragment() {
                         val resourceImage2Id = resources.getIdentifier(image2Id, "id", requireContext().packageName)
                         val imagen2 = view.findViewById<ImageView>(resourceImage2Id)
 
+                        val laTieneX : Boolean
+                        val laTieneY : Boolean
 
-                        showMejoraDialogo(context, imagen1, imagen2).thenApply {
+                        if (contR[x-1] >= 1){
+                            laTieneX = true
+                        }else{
+                            laTieneX = false
+                        }
+                        if (contR[y-1] >= 1){
+                            laTieneY = true
+                        }else{
+                            laTieneY = false
+                        }
+
+
+                        showMejoraDialogo(context, imagen1, imagen2, laTieneX, laTieneY).thenApply {
                                 opcion ->
                             if (opcion == 1){
                                 contR[x-1] += 1
@@ -171,7 +200,7 @@ class RewardFragment : Fragment() {
     }
     private fun resetearColeccion(view: View,contR: IntArray) {
         for (i in 1 until 21) {
-            contR[i] = 0
+            contR[i-1] = 0
             val textId = "rewardCont_$i"
             val resourceTextId = resources.getIdentifier(textId, "id", requireContext().packageName)
             val textView = view.findViewById<TextView>(resourceTextId)
@@ -205,7 +234,9 @@ class RewardFragment : Fragment() {
     private fun showMejoraDialogo(
         context: Context?,
         imageView1: ImageView,
-        imageView2: ImageView
+        imageView2: ImageView,
+        laTieneX: Boolean,
+        laTieneY: Boolean
     ): CompletableFuture<Int> {
         val completableFuture = CompletableFuture<Int>()
 
@@ -225,7 +256,9 @@ class RewardFragment : Fragment() {
         radioGroup1.orientation = RadioGroup.HORIZONTAL
 
         val radioButton1 = RadioButton(context)
-        radioButton1.text = "Carta 1"
+        if (laTieneX){
+            radioButton1.text = "obtenida"
+        }
         radioGroup1.addView(radioButton1)
 
         val newImageView1 = ImageView(context)
@@ -244,7 +277,9 @@ class RewardFragment : Fragment() {
         radioGroup2.orientation = RadioGroup.HORIZONTAL
 
         val radioButton2 = RadioButton(context)
-        radioButton2.text = "Carta 2"
+        if (laTieneY){
+            radioButton1.text = "obtenida"
+        }
         radioGroup2.addView(radioButton2)
 
         val newImageView2 = ImageView(context)
