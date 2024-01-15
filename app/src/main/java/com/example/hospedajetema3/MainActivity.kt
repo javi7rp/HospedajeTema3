@@ -3,20 +3,28 @@ package com.example.hospedajetema3
 
 
 import FragmentNotas
+import RewardFragment
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.hospedajetema3.fragments.FragmentFav
 import com.example.hospedajetema3.fragments.FragmentInicio
 import com.example.hospedajetema3.fragments.FragmentPerfil
+import com.example.hospedajetema3.fragments.fragment_notes.InsigniasFragment
+import com.example.hospedajetema3.fragments.fragment_notes.NotesFragment
+import com.example.hospedajetema3.fragments.fragment_notes.OtherFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -117,10 +125,129 @@ class MainActivity : AppCompatActivity() {
     }
  */
 
-
+/*
     //DrawerNav
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.drawer_main)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)
+
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // Configurar la selección de elementos en el NavigationView
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.fragmentInicio -> {
+                    // Reemplazar el fragmento actual con el Fragmento1
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, FragmentInicio())
+                        .commit()
+                }
+                R.id.fragmentNotas -> {
+                    // Reemplazar el fragmento actual con el Fragmento2
+                    val subMenu = navView.menu.findItem(R.id.fragmentNotas2)?.subMenu
+                    subMenu?.let {
+                        for (i in 0 until it.size()) {
+                            val childItem = it.getItem(i)
+                            childItem.isVisible = !childItem.isVisible
+                        }
+                    }
+                }
+
+                //Submenus del fragmentNotas
+                R.id.fragment2_1 ->{
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, OtherFragment())
+                        .commit()
+                }
+                R.id.fragment2_2 ->{
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, NotesFragment())
+                        .commit()
+                }
+                R.id.fragment2_3 ->{
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, RewardFragment())
+                        .commit()
+                }
+                R.id.fragment2_4 ->{
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, InsigniasFragment())
+                        .commit()
+                }
+
+                R.id.fragmentFav -> {
+                    // Reemplazar el fragmento actual con el Fragmento3
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, FragmentFav())
+                        .commit()
+                }
+                R.id.fragmentPerfil -> {
+                    // Reemplazar el fragmento actual con el Fragmento4
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, FragmentPerfil())
+                        .commit()
+                }
+            }
+
+            // Cerrar el Drawer después de seleccionar un elemento
+            if (menuItem.itemId != R.id.fragmentNotas) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            true
+        }
+        // Configurar el icono de la ActionBar para abrir el Drawer
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        // Mostrar el primer fragmento al iniciar la actividad
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, FragmentInicio())
+            .commit()
 
 
+    }
+
+    override fun onBackPressed() {
+        // Cerrar el Drawer al presionar el botón de retroceso si está abierto
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Abrir o cerrar el Drawer según el estado actual
+                if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.openDrawer(GravityCompat.START)
+                } else {
+                    // No cerrar el Drawer si se hace clic en el icono de hamburguesa
+                    if (item.itemId != R.id.fragmentNotas) {
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                }
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+ */
 
 
     //metodo con hide y show()
