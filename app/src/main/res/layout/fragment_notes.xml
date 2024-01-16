@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.fragment_notes.NotesFragment">
+    android:id="@+id/relativeLayoutContainer">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="FRAGMENT NOTES" />
+        android:src="@drawable/nota_escrita"
+        android:scaleType="centerCrop" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/noteEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escribe tu nota aquí"
+        android:layout_margin="16dp"
+        android:background="#80FFFFFF"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/addNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noteEditText"
+        android:layout_marginTop="8dp"
+        android:text="Agregar Nota" />
+
+</RelativeLayout>

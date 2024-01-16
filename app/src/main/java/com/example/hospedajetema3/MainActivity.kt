@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
     }
  */
 
-/*
+
     //DrawerNav
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
- */
+
 
 
     //metodo con hide y show()
