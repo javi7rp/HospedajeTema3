@@ -27,7 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity() {
+//class MainActivity : AppCompatActivity() {
 
 
     /*
@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
 
 /*
+//----------------------------------------------------------------------------------- BASIC MENU 3 OPCIONES ------------------------------------------------------------------------------------------------
     //Menu de los 3 puntitos con las 3 opciones q he introducido
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
@@ -126,7 +127,7 @@ class MainActivity : AppCompatActivity() {
  */
 
 /*
-    //DrawerNav
+    //----------------------------------------------------------------------------------- DRAWER LAYOUT NAVIGATION ------------------------------------------------------------------------------------------------
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
 
@@ -250,6 +251,11 @@ class MainActivity : AppCompatActivity() {
  */
 
 
+
+
+
+/*
+//----------------------------------------------------------------------------------- BOTTOM NAVIGATION VIEW ------------------------------------------------------------------------------------------------
     //metodo con hide y show()
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var fragmentInicio: FragmentInicio
@@ -315,6 +321,178 @@ class MainActivity : AppCompatActivity() {
             .show(fragment)
             .commit()
     }
+
+ */
+
+
+
+
+
+
+
+    //----------------------------------------------------------------------------------- UNION 3 MENUS  ------------------------------------------------------------------------------------------------
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navView: NavigationView
+    private lateinit var bottomNavigationView: BottomNavigationView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main)
+
+        // Inicializar vistas y componentes
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        // Configurar ActionBarDrawerToggle para DrawerLayout
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawerLayout,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // Configurar selección de elementos en NavigationView
+        navView.setNavigationItemSelectedListener { menuItem ->
+            handleNavigationItemSelected(menuItem.itemId)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
+
+        // Configurar listener para BottomNavigationView
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            handleNavigationItemSelected(menuItem.itemId)
+            true
+        }
+
+        // Mostrar el primer fragmento al iniciar la actividad (reemplaza con tu lógica)
+        showFragment(FragmentInicio)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                // Abrir o cerrar el Drawer según el estado actual
+                if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.openDrawer(GravityCompat.START)
+                } else {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                }
+                return true
+            }
+            R.id.action_settings -> {
+                openSystemSettings()
+                return true
+            }
+            R.id.action_about -> {
+                showAboutDialog()
+                return true
+            }
+            R.id.action_exit -> {
+                exitApp()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    // Método para manejar la selección de elementos de navegación
+    private fun handleNavigationItemSelected(itemId: Int) {
+        when (itemId) {
+            R.id.fragmentInicio -> showFragment(FragmentInicio.newInstance())
+            R.id.fragmentNotas -> {
+                // Lógica para el fragmento de notas
+            }
+            R.id.fragmentFav -> showFragment(FragmentFav.newInstance())
+            R.id.fragmentPerfil -> showFragment(FragmentPerfil.newInstance())
+        }
+    }
+
+    // Método para mostrar un fragmento en el contenedor
+    private fun showFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    private fun openSystemSettings() {
+        val intent = Intent(Settings.ACTION_SETTINGS)
+        startActivity(intent)
+    }
+
+    private fun showAboutDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Acerca de la app")
+        builder.setMessage("VIDEOJUEGOS JAVI\n" +
+                "Desarrollado por: Javi Redondo\n\n" +
+                "Versión actual: 1.3\n\n" +
+                "Para más información, visite: JaviAppProyectoFinal.com\n")
+        builder.setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+        builder.show()
+    }
+
+    private fun exitApp() {
+        finish()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
