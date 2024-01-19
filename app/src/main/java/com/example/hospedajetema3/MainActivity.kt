@@ -9,11 +9,9 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -27,7 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
-//class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
 
     /*
@@ -89,7 +87,7 @@ import com.google.android.material.navigation.NavigationView
      */
 
 
-/*
+
 //----------------------------------------------------------------------------------- BASIC MENU 3 OPCIONES ------------------------------------------------------------------------------------------------
     //Menu de los 3 puntitos con las 3 opciones q he introducido
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -124,7 +122,7 @@ import com.google.android.material.navigation.NavigationView
     private fun exitApp() {
         System.exit(0)
     }
- */
+
 
 /*
     //----------------------------------------------------------------------------------- DRAWER LAYOUT NAVIGATION ------------------------------------------------------------------------------------------------
@@ -254,7 +252,7 @@ import com.google.android.material.navigation.NavigationView
 
 
 
-/*
+
 //----------------------------------------------------------------------------------- BOTTOM NAVIGATION VIEW ------------------------------------------------------------------------------------------------
     //metodo con hide y show()
     private lateinit var bottomNavigationView: BottomNavigationView
@@ -322,7 +320,7 @@ import com.google.android.material.navigation.NavigationView
             .commit()
     }
 
- */
+
 
 
 
@@ -331,7 +329,7 @@ import com.google.android.material.navigation.NavigationView
 
 
     //----------------------------------------------------------------------------------- UNION 3 MENUS  ------------------------------------------------------------------------------------------------
-
+/*
 class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
@@ -370,58 +368,60 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Mostrar el primer fragmento al iniciar la actividad (reemplaza con tu lógica)
-        showFragment(FragmentInicio)
+        showFragment(FragmentInicio())
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
-                // Abrir o cerrar el Drawer según el estado actual
-                if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.openDrawer(GravityCompat.START)
-                } else {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
+            R.id.action_settings -> openSystemSettings()
+            R.id.action_about -> showAboutDialog()
+            R.id.action_exit -> exitApp()
+            R.id.fragmentInicio, R.id.fragmentNotas, R.id.fragment2_1,
+            R.id.fragment2_2, R.id.fragment2_3, R.id.fragment2_4,
+            R.id.fragmentFav, R.id.fragmentPerfil,
+            R.id.nav_inicio, R.id.nav_notas, R.id.nav_fav, R.id.nav_perfil -> {
+                handleNavigationItemSelected(item.itemId)
                 return true
             }
-            R.id.action_settings -> {
-                openSystemSettings()
-                return true
-            }
-            R.id.action_about -> {
-                showAboutDialog()
-                return true
-            }
-            R.id.action_exit -> {
-                exitApp()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
     }
 
     // Método para manejar la selección de elementos de navegación
     private fun handleNavigationItemSelected(itemId: Int) {
-        when (itemId) {
-            R.id.fragmentInicio -> showFragment(FragmentInicio.newInstance())
-            R.id.fragmentNotas -> {
-                // Lógica para el fragmento de notas
-            }
-            R.id.fragmentFav -> showFragment(FragmentFav.newInstance())
-            R.id.fragmentPerfil -> showFragment(FragmentPerfil.newInstance())
+        val fragment = when (itemId) {
+            R.id.fragmentInicio, R.id.nav_inicio -> FragmentInicio()
+            R.id.fragmentNotas, R.id.nav_notas -> FragmentNotas()
+            R.id.fragment2_1 -> OtherFragment()
+            R.id.fragment2_2 -> NotesFragment()
+            R.id.fragment2_3 -> RewardFragment()
+            R.id.fragment2_4 -> InsigniasFragment()
+            R.id.fragmentFav, R.id.nav_fav -> FragmentFav()
+            R.id.fragmentPerfil, R.id.nav_perfil -> FragmentPerfil()
+            else -> null
         }
+        fragment?.let { showFragment(it) }
     }
 
     // Método para mostrar un fragmento en el contenedor
     private fun showFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .commit()
+        supportFragmentManager.beginTransaction().apply {
+            // Ocultar todos los fragmentos
+            for (existingFragment in supportFragmentManager.fragments) {
+                hide(existingFragment)
+            }
+
+            // Mostrar el fragmento actual
+            show(fragment)
+
+            commitAllowingStateLoss()
+        }
     }
 
     private fun openSystemSettings() {
@@ -445,54 +445,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ */
 }
+

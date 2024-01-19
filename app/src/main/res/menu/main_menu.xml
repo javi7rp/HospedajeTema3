@@ -1,0 +1,78 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Toolbar Menu -->
+    <item
+        android:id="@+id/action_settings"
+        android:title="Configuración"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_about"
+        android:title="Acerca de"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_exit"
+        android:title="Salir"
+        app:showAsAction="ifRoom"/>
+
+    <!-- DrawerLayout Menu -->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/fragmentInicio"
+            android:title="Inicio"
+            android:icon="@drawable/casa"
+            />
+        <item
+            android:id="@+id/fragmentNotas"
+            android:title="Notas"
+            android:icon="@drawable/notas"/>
+        <item
+            android:id="@+id/fragmentNotas2"
+            android:title="Notas"
+            android:icon="@drawable/notas">
+
+            <menu>
+                <item
+                    android:id="@+id/fragment2_1"
+                    android:title="     Otros"
+                    android:visible="false"/>
+                <item
+                    android:id="@+id/fragment2_2"
+                    android:title="     Notes"
+                    android:visible="false"/>
+                <item
+                    android:id="@+id/fragment2_3"
+                    android:title="     Coleccion"
+                    android:visible="false"/>
+                <item
+                    android:id="@+id/fragment2_4"
+                    android:title="     Rewards"
+                    android:visible="false"/>
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/fragmentFav"
+            android:title="Favoritos"
+            android:icon="@drawable/no_fav"/>
+        <item
+            android:id="@+id/fragmentPerfil"
+            android:title="Perfil"
+            android:icon="@drawable/usuario"/>
+
+
+    </group>
+
+    <!-- BottomNavigationView Menu -->
+    <item
+        android:id="@+id/nav_inicio"
+        android:title="Inicio"/>
+    <item
+        android:id="@+id/nav_notas"
+        android:title="Notas"/>
+    <item
+        android:id="@+id/nav_fav"
+        android:title="Favoritos"/>
+    <item
+        android:id="@+id/nav_perfil"
+        android:title="Perfil"/>
+</menu>

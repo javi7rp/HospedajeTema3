@@ -1,0 +1,10 @@
+<!-- res/values/arrays.xml -->
+<resources>
+    <string-array name="color_options">
+        <item>Rojo</item>
+        <item>Azul</item>
+        <item>Verde</item>
+        <item>Rosa</item>
+        <item>Amarillo</item>
+    </string-array>
+</resources>
